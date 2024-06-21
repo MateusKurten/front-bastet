@@ -9,6 +9,7 @@ export default function Page() {
     const onSubmit = async (data: any) => {
         await Login(data).then((res) => {
             sessionStorage.setItem("idUsuario", res.id);
+            sessionStorage.setItem("jwt", res.token);
             alert(res.message);
             location.reload();
         });
