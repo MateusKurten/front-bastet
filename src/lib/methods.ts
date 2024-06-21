@@ -74,7 +74,7 @@ export async function Login({ email, senha } : { email: string, senha : string }
     }
 }
 
-export async function ListarCursos(filtro?: string, jwt?: string) {
+export async function ListarCursos(filtro?: string, jwt?: string|null) {
     try {
         const result = await request(router["listar-cursos"](filtro, jwt), {
             method: "GET",

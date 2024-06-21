@@ -18,11 +18,12 @@ export default function Page() {
   const [filtro, setFiltro] = useState('');
   const [inscricao, setInscricao] = useState('');
   const [filtroTemporario, setFiltroTemporario] = useState('');
+  const jwt = sessionStorage.getItem('jwt');
 
   useEffect(() => {
     const fetchCursos = async () => {
       try {
-        const cursosData = await ListarCursos(filtro);
+        const cursosData = await ListarCursos(filtro, jwt);
         setCursos(cursosData);
       } catch (error) {
         console.error('Erro ao listar cursos:', error);
@@ -30,7 +31,6 @@ export default function Page() {
     };
 
     fetchCursos();
-    console.log(cursos);
   }, [filtro, inscricao]);
 
   const handleFiltroChange = (e: any) => {
