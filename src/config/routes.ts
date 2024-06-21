@@ -1,5 +1,5 @@
 export default {
-    'root': 'https://backend-bastet.vercel.app/', //Rota da API
+    'root': 'https://backend-bastet.vercel.app', //Rota da API
     'criar-usuario': () => '/usuarios', //url de criar usuários
     'login': () => '/login', //url de login
     'listar-cursos': (filtro?: any) => {
