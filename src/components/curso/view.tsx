@@ -1,7 +1,30 @@
 import type { Curso as CursoType } from "@/lib/mockup"
 import Image from "next/image"
+import { Inscricao, Cancelar } from '@/lib/methods';
 
-export default function CursoView({ data } : { data : CursoType }){
+export default function CursoView({ data, setInscricao, inscricao } : { data : CursoType, setInscricao: any, inscricao: string }){
+    const usuarioId = sessionStorage.getItem('idUsuario');
+
+    const handleInscricao = async () => {
+        await Inscricao({idCurso: data.id}).then((res) => {
+            if (res.message == "Inscrição realizada com sucesso!") {
+                setInscricao(data.id + '-inscricao')
+            }
+            alert(res.message)
+            
+        });
+    };
+
+    const handleCancelar = async () => {
+        await Cancelar({idCurso: data.id}).then((res) => {
+            if (res.message == "Inscrição cancelada com sucesso!") {
+                setInscricao(data.id + '-cancelamento')
+            }
+            alert(res.message)
+            
+        });
+    };
+
     return <div className="border flex-1 flex flex-col">
         <figure className="relative aspect-video">
             <Image src={ data.capa } alt={ data.nome } fill />
@@ -12,14 +35,15 @@ export default function CursoView({ data } : { data : CursoType }){
             <p>{ data.descricao }</p>
             <div className="flex flex-row flex-wrap gap-1">
                 <span className="text-xs py-1 px-2 leading-tight bg-slate-200 rounded-2xl">{ data.inscricoes } inscritos</span>
-                <span className="text-xs py-1 px-2 leading-tight bg-slate-200 rounded-2xl">Inicia em { data.inicio.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: "numeric" }) }</span>
+                <span className="text-xs py-1 px-2 leading-tight bg-slate-200 rounded-2xl">Inicia em { new Date(data.inicio).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: "numeric" }) }</span>
             </div>
         </div>
-        {  
+        { usuarioId && (
             data.inscrito ? data.inscricao_cancelada ? 
                 <p className="bg-red-500 p-4 text-center">Inscrição cancelada</p> : 
-                <button className="text-center p-4 bg-slate-300 hover:bg-slate-400">Cancelar inscrição</button> : 
-                <button className="text-center p-4 bg-indigo-500 hover:bg-indigo-600 text-white">Fazer inscrição</button>
+                <button className="text-center p-4 bg-slate-300 hover:bg-slate-400" onClick={handleCancelar}>Cancelar inscrição</button> : 
+                <button className="text-center p-4 bg-indigo-500 hover:bg-indigo-600 text-white" onClick={handleInscricao}>Fazer inscrição</button>
+            )
         }
     </div>
 }

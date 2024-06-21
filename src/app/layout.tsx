@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Header from '@/components/partials/header';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   description: "Plataforma de cursos",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -19,15 +20,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <div className="flex min-h-screen flex-col gap-10">
-          <header className="layout-guide h-[16rem] flex flex-col justify-end">
-            <h1 className="text-5xl font-bold py-5"><Link href="/" className="text-indigo-800 hover:text-indigo-900">Bastet</Link></h1>
-            <p>Uma nova plataforma de cursos</p>
-            <menu className="flex flex-row gap-4">
-              <Link className="text-indigo-600" href="/cadastro">Fazer cadastro</Link>
-              <Link className="text-indigo-600" href="/login">Fazer login</Link>
-              <Link className="text-indigo-600" href="/usuario/will">Meus cursos</Link>
-            </menu>
-          </header>
+          <Header />
           <div className="layout-guide flex-1">
             {children}
           </div>
