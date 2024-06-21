@@ -2,7 +2,7 @@ import type { Curso as CursoType } from "@/lib/mockup"
 import Image from "next/image"
 import { Inscricao, Cancelar } from '@/lib/methods';
 
-export default function CursoView({ data, setInscricao, inscricao } : { data : CursoType, setInscricao: any, inscricao: string }){
+export default function CursoView({ data, setInscricao } : { data : CursoType, setInscricao: any }){
     const usuarioId = sessionStorage.getItem('idUsuario');
     const jwt = sessionStorage.getItem('jwt');
 

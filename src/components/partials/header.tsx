@@ -1,7 +1,6 @@
 "use client"
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import { getSession } from "@/lib/methods";
 
 export default function Header(){
 

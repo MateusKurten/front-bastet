@@ -24,6 +24,7 @@ export default function Page() {
       try {
         const cursosData = await MeusCursos({idUsuario: idUsuario, jwt: jwt});
         setCursos(cursosData);
+        console.log(cursos);
         if (cursosData.message) {
           alert(cursosData.message);
         }
@@ -40,7 +41,7 @@ export default function Page() {
         <h2 className="page-title">Cursos</h2>
         <div className='grid md:grid-cols-2 xl:grid-cols-3 gap-8'>
           {Array.isArray(cursos) && cursos.map((curso) => (
-            <Curso data={curso} key={curso.id} setInscricao={setInscricao} inscricao={inscricao} />
+            <Curso data={curso} key={curso.id} setInscricao={setInscricao} />
           ))}
         </div>
       </main>

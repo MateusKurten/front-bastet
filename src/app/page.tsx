@@ -60,7 +60,7 @@ export default function Page() {
       </div>
       <div className='grid md:grid-cols-2 xl:grid-cols-3 gap-8'>
         { cursos.map((curso) => (
-          <Curso key={curso.id} data={curso} setInscricao={setInscricao} inscricao={inscricao} />
+          <Curso key={curso.id} data={curso} setInscricao={setInscricao} />
         ))}
       </div>
     </main>
