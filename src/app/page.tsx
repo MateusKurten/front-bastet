@@ -18,9 +18,9 @@ export default function Page() {
   const [filtro, setFiltro] = useState('');
   const [inscricao, setInscricao] = useState('');
   const [filtroTemporario, setFiltroTemporario] = useState('');
-  const jwt = sessionStorage.getItem('jwt');
 
   useEffect(() => {
+    const jwt = sessionStorage.getItem('jwt');
     const fetchCursos = async () => {
       try {
         const cursosData = await ListarCursos(filtro, jwt);
