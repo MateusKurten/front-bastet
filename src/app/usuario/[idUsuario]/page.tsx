@@ -24,7 +24,6 @@ export default function Page() {
       try {
         const cursosData = await MeusCursos({idUsuario: idUsuario, jwt: jwt});
         setCursos(cursosData);
-        console.log(cursos);
         if (cursosData.message) {
           alert(cursosData.message);
         }

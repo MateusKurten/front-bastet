@@ -30,6 +30,7 @@ export default function Page() {
     };
 
     fetchCursos();
+    console.log(cursos);
   }, [filtro, inscricao]);
 
   const handleFiltroChange = (e: any) => {
