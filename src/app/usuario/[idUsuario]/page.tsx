@@ -3,9 +3,17 @@ import { useState, useEffect } from 'react';
 import Curso from '@/components/curso';
 import { MeusCursos } from '@/lib/methods';
 import { useParams } from 'next/navigation'
-
+interface Curso {
+  id: string
+  nome: string,
+  inicio: Date,
+  descricao: string,
+  capa: string,
+  inscricoes: number
+  inscricao_cancelada: boolean|undefined
+}
 export default function Page() {
-  const [cursos, setCursos] = useState([]);
+  const [cursos, setCursos] = useState<Curso[]>([]);
   const [inscricao, setInscricao] = useState('');
   const { idUsuario } = useParams<{ idUsuario: string }>()
 
@@ -30,7 +38,7 @@ export default function Page() {
         <h2 className="page-title">Cursos</h2>
         <div className='grid md:grid-cols-2 xl:grid-cols-3 gap-8'>
           {Array.isArray(cursos) && cursos.map((curso) => (
-            <Curso data={curso} setInscricao={setInscricao} inscricao={inscricao} />
+            <Curso data={curso} key={curso.id} setInscricao={setInscricao} inscricao={inscricao} />
           ))}
         </div>
       </main>

@@ -7,7 +7,7 @@ async function request(path:string, options : {
     method?: string,
     body?: string,
     headers?: any,
-    credentials?: string;
+    credentials?: RequestCredentials;
 } = { method: "GET" }){
     const url = `${ router.root }${ path }`;
     return await fetch( url, options ).then( async (res) => await res.json() ).catch( err => { error: err.message });

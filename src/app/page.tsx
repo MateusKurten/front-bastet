@@ -3,8 +3,18 @@ import { useState, useEffect } from 'react';
 import Curso from '@/components/curso';
 import { ListarCursos } from '@/lib/methods';
 
+interface Curso {
+  id: string
+  nome: string,
+  inicio: Date,
+  descricao: string,
+  capa: string,
+  inscricoes: number
+  inscricao_cancelada: boolean|undefined
+}
+
 export default function Page() {
-  const [cursos, setCursos] = useState([]);
+  const [cursos, setCursos] = useState<Curso[]>([]);
   const [filtro, setFiltro] = useState('');
   const [inscricao, setInscricao] = useState('');
   const [filtroTemporario, setFiltroTemporario] = useState('');
