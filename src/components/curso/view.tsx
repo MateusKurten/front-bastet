@@ -4,9 +4,10 @@ import { Inscricao, Cancelar } from '@/lib/methods';
 
 export default function CursoView({ data, setInscricao, inscricao } : { data : CursoType, setInscricao: any, inscricao: string }){
     const usuarioId = sessionStorage.getItem('idUsuario');
+    const jwt = sessionStorage.getItem('jwt');
 
     const handleInscricao = async () => {
-        await Inscricao({idCurso: data.id}).then((res) => {
+        await Inscricao({idCurso: data.id, jwt: jwt}).then((res) => {
             if (res.message == "Inscrição realizada com sucesso!") {
                 setInscricao(data.id + '-inscricao')
             }
@@ -16,7 +17,7 @@ export default function CursoView({ data, setInscricao, inscricao } : { data : C
     };
 
     const handleCancelar = async () => {
-        await Cancelar({idCurso: data.id}).then((res) => {
+        await Cancelar({idCurso: data.id, jwt: jwt}).then((res) => {
             if (res.message == "Inscrição cancelada com sucesso!") {
                 setInscricao(data.id + '-cancelamento')
             }

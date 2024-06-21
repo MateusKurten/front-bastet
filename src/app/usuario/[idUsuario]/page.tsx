@@ -12,15 +12,17 @@ interface Curso {
   inscricoes: number
   inscricao_cancelada: boolean|undefined
 }
+
 export default function Page() {
   const [cursos, setCursos] = useState<Curso[]>([]);
   const [inscricao, setInscricao] = useState('');
   const { idUsuario } = useParams<{ idUsuario: string }>()
+  const jwt = sessionStorage.getItem('jwt');
 
   useEffect(() => {
     const fetchCursos = async () => {
       try {
-        const cursosData = await MeusCursos({idUsuario: idUsuario});
+        const cursosData = await MeusCursos({idUsuario: idUsuario, jwt: jwt});
         setCursos(cursosData);
         if (cursosData.message) {
           alert(cursosData.message);

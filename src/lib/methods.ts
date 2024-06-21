@@ -74,9 +74,9 @@ export async function Login({ email, senha } : { email: string, senha : string }
     }
 }
 
-export async function ListarCursos(filtro?: string) {
+export async function ListarCursos(filtro?: string, jwt?: string) {
     try {
-        const result = await request(router["listar-cursos"](filtro), {
+        const result = await request(router["listar-cursos"](filtro, jwt), {
             method: "GET",
             credentials: 'include'
         });
@@ -91,10 +91,11 @@ export async function ListarCursos(filtro?: string) {
     }
 }
 
-export async function Inscricao({ idCurso } : { idCurso : string }){
+export async function Inscricao({ idCurso, jwt } : { idCurso : string, jwt: string|null }){
     const result = await request( router["inscrever-curso"](idCurso) , {
         method: "POST",
         credentials: 'include',
+        body: JSON.stringify({ jwt }),
         headers: {
             "Content-Type": "application/json",
         },
@@ -107,10 +108,11 @@ export async function Inscricao({ idCurso } : { idCurso : string }){
     return result
 }
 
-export async function Cancelar({ idCurso } : { idCurso : string }){
+export async function Cancelar({ idCurso, jwt } : { idCurso : string, jwt: string|null }){
     const result = await request( router["cancelar-curso"](idCurso) , {
         method: "PATCH",
         credentials: 'include',
+        body: JSON.stringify({ jwt }),
         headers: {
             "Content-Type": "application/json",
         },
@@ -123,9 +125,9 @@ export async function Cancelar({ idCurso } : { idCurso : string }){
     return result
 }
 
-export async function MeusCursos({ idUsuario }:{ idUsuario : string }){
+export async function MeusCursos({ idUsuario, jwt }:{ idUsuario : string, jwt: string|null }){
     try {
-        const result = await request(router["meus-cursos"](idUsuario), {
+        const result = await request(router["meus-cursos"](idUsuario, jwt), {
             method: "GET",
             credentials: 'include'
         });
