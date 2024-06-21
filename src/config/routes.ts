@@ -10,6 +10,7 @@ export default {
         if (jwt) {
             params.append('jwt', jwt);
         }
+        console.log('/cursos' + (params.toString() ? '?' + params.toString() : ''));
         return '/cursos' + (params.toString() ? '?' + params.toString() : '');
     },
     'inscrever-curso': ( idCurso : string ) => `/cursos/${ idCurso }`, //url de se inscrever em curso,
